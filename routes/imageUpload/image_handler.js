@@ -37,7 +37,7 @@ exports.imageUp = (req, res, next) => {
 }
 
 exports.fileUp = (req, res, next) => {
-  //上传大小小于10Mb的文件
+  //上传大小小于5Mb的文件
   //接收数据
   const form = formidable({
     multiples: true,
@@ -65,17 +65,18 @@ exports.fileUp = (req, res, next) => {
     let newName = path.join(__dirname, '../../public/file/' + files.file.originalFilename)
 
     //对读取的文件进行重命名
+    console.log(newName)
     fs.rename(folderPath, newName, (err) => {
       if (err) {
         console.log(err)
         return
       } else {
         console.log('重命名成功')
+        res.send({
+          code: 200,
+          msg: '上传成功'
+        })
       }
-    })
-    res.send({
-      code: 200,
-      msg: '上传成功'
     })
   })
 }

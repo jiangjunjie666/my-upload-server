@@ -4,7 +4,6 @@ var path = require('path')
 var cookieParser = require('cookie-parser')
 var logger = require('morgan')
 
-const imageRouter = require('./routes/imageUpload/image')
 //配置跨域
 var cors = require('cors')
 
@@ -19,7 +18,8 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
-
+//注册路由
+const imageRouter = require('./routes/imageUpload/image')
 app.use('/api', imageRouter)
 
 // catch 404 and forward to error handler
